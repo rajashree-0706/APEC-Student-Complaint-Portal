@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Student Dashboard | APEC Complaint Portal
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         NAVBAR
+    ========================================== -->
+
+    <nav class="navbar">
+
+        <div class="nav-brand">
+
+            <img
+                src="assets/apec-logo.png"
+                alt="APEC Logo"
+                class="nav-logo"
+            >
+
+            <div>
+
+                <strong>
+                    APEC Student Portal
+                </strong>
+
+                <span>
+                    Complaint & Grievance Management
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="nav-actions">
+
+            <a
+                href="track.html"
+                class="nav-link"
+            >
+                Track Complaint
+            </a>
+
+            <a
+                href="login.html"
+                class="nav-link"
+                onclick="localStorage.removeItem('currentUser');"
+            >
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="dashboard-container">
+
+
+        <!-- =====================================
+             HEADER
+        ====================================== -->
+
+        <section class="dashboard-header">
+
+            <div class="dashboard-title">
+
+                <div class="title-logo-wrap">
+
+                    <img
+                        src="assets/apec-logo.png"
+                        alt="APEC"
+                        class="title-logo"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <p class="eyebrow">
+                        STUDENT DASHBOARD
+                    </p>
+
+                    <h1>
+                        Welcome back,
+                        <span
+                            data-student-name
+                        >
+                            APEC Student
+                        </span>
+                        👋
+                    </h1>
+
+                    <p class="dashboard-subtitle">
+
+                        Raise concerns, track progress,
+                        and help us build a better campus.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Student Profile -->
+
+            <div class="student-profile">
+
+                <div class="profile-avatar">
+                    S
+                </div>
+
+                <div>
+
+                    <strong
+                        data-student-name
+                    >
+                        APEC Student
+                    </strong>
+
+                    <small
+                        data-student-id
+                    >
+                        Student
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             STATISTICS
+        ====================================== -->
+
+        <section class="stats-grid">
+
+
+            <!-- Total -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📋
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Complaints
+                    </span>
+
+                    <h3>
+                        00
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- In Progress -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ⏳
+                </div>
+
+                <div>
+
+                    <span>
+                        In Progress
+                    </span>
+
+                    <h3>
+                        00
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- Resolved -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <span>
+                        Resolved
+                    </span>
+
+                    <h3>
+                        00
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- Response -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ⚡
+                </div>
+
+                <div>
+
+                    <span>
+                        Avg. Response
+                    </span>
+
+                    <h3>
+                        —
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             DASHBOARD GRID
+        ====================================== -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- =================================
+                 RECENT COMPLAINTS
+            ================================== -->
+
+            <div class="dashboard-card recent-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <p class="card-eyebrow">
+                            ACTIVITY
+                        </p>
+
+                        <h2>
+                            Recent Complaints
+                        </h2>
+
+                    </div>
+
+
+                    <a
+                        href="track.html"
+                        class="text-link"
+                    >
+                        View All →
+                    </a>
+
+                </div>
+
+
+                <div class="recent-complaints">
+
+                    <!-- Firebase data will appear here -->
+
+                    <div
+                        class="empty-state"
+                        style="
+                            padding:35px;
+                            text-align:center;
+                        "
+                    >
+
+                        <div
+                            style="
+                                font-size:30px;
+                                margin-bottom:10px;
+                            "
+                        >
+                            📋
+                        </div>
+
+                        <strong>
+                            Loading complaints...
+                        </strong>
+
+                        <p
+                            style="
+                                font-size:11px;
+                                color:#7b8782;
+                                margin-top:6px;
+                            "
+                        >
+                            Your latest complaints
+                            will appear here.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================
+                 CAMPUS INTELLIGENCE
+            ================================== -->
+
+            <div
+                class="dashboard-card campus-intelligence"
+            >
+
+                <div class="card-header">
+
+                    <div>
+
+                        <p class="card-eyebrow">
+                            SMART INSIGHT
+                        </p>
+
+                        <h2>
+                            Campus Intelligence
+                        </h2>
+
+                    </div>
+
+                    <div class="intelligence-badge">
+                        AI
+                    </div>
+
+                </div>
+
+
+                <p
+                    style="
+                        color:#718078;
+                        font-size:11px;
+                        line-height:1.6;
+                        margin-bottom:18px;
+                    "
+                >
+                    Repeated complaint patterns help
+                    identify emerging campus issues.
+                </p>
+
+
+                <!-- Issue 1 -->
+
+                <div class="issue-item">
+
+                    <div class="issue-icon">
+                        💧
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Campus Issues
+                        </strong>
+
+                        <p>
+                            Monitoring complaint patterns
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Issue 2 -->
+
+                <div class="issue-item">
+
+                    <div class="issue-icon">
+                        💻
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Technology
+                        </strong>
+
+                        <p>
+                            No repeated issues detected
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Issue 3 -->
+
+                <div class="issue-item">
+
+                    <div class="issue-icon">
+                        🏫
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Infrastructure
+                        </strong>
+
+                        <p>
+                            Campus health is being monitored
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="intelligence-note"
+                    style="
+                        margin-top:18px;
+                        padding:13px;
+                        border-radius:12px;
+                        background:#f3faf6;
+                        border:1px solid #dceee5;
+                    "
+                >
+
+                    <strong
+                        style="
+                            display:block;
+                            font-size:11px;
+                            margin-bottom:4px;
+                        "
+                    >
+                        💡 Why this matters
+                    </strong>
+
+                    <span
+                        style="
+                            font-size:10px;
+                            color:#718078;
+                            line-height:1.5;
+                        "
+                    >
+                        Your complaints help APEC identify
+                        recurring problems before they grow.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             QUICK ACTIONS
+        ====================================== -->
+
+        <section class="quick-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="card-eyebrow">
+                        ACTION CENTER
+                    </p>
+
+                    <h2>
+                        What would you like to do?
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+
+                <!-- Submit -->
+
+                <a
+                    href="complaint.html"
+                    class="quick-action"
+                    data-action="submit"
+                >
+
+                    <div class="quick-icon">
+                        +
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Submit Complaint
+                        </strong>
+
+                        <span>
+                            Report a new campus issue
+                        </span>
+
+                    </div>
+
+                    <b>
+                        →
+                    </b>
+
+                </a>
+
+
+
+                <!-- Track -->
+
+                <a
+                    href="track.html"
+                    class="quick-action"
+                    data-action="track"
+                >
+
+                    <div class="quick-icon">
+                        ◉
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Track Complaint
+                        </strong>
+
+                        <span>
+                            Check your complaint status
+                        </span>
+
+                    </div>
+
+                    <b>
+                        →
+                    </b>
+
+                </a>
+
+
+
+                <!-- Confidential -->
+
+                <a
+                    href="complaint.html?confidential=true"
+                    class="quick-action"
+                    data-action="confidential"
+                >
+
+                    <div class="quick-icon">
+                        🔒
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Confidential Report
+                        </strong>
+
+                        <span>
+                            Submit privately
+                        </span>
+
+                    </div>
+
+                    <b>
+                        →
+                    </b>
+
+                </a>
+
+
+
+                <!-- Feedback -->
+
+                <a
+                    href="track.html"
+                    class="quick-action"
+                    data-action="feedback"
+                >
+
+                    <div class="quick-icon">
+                        ★
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Give Feedback
+                        </strong>
+
+                        <span>
+                            Rate a resolved complaint
+                        </span>
+
+                    </div>
+
+                    <b>
+                        →
+                    </b>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             STUDENT SUPPORT
+        ====================================== -->
+
+        <section
+            style="
+                margin-top:25px;
+                padding:20px 22px;
+                border-radius:18px;
+                background:linear-gradient(
+                    135deg,
+                    #0c6b4d,
+                    #094c39
+                );
+                color:white;
+                display:flex;
+                align-items:center;
+                justify-content:space-between;
+                gap:20px;
+                overflow:hidden;
+                position:relative;
+            "
+        >
+
+            <div>
+
+                <span
+                    style="
+                        font-size:9px;
+                        letter-spacing:1.5px;
+                        font-weight:800;
+                        opacity:.7;
+                    "
+                >
+                    APEC STUDENT VOICE
+                </span>
+
+                <h3
+                    style="
+                        margin:6px 0;
+                        font-size:20px;
+                    "
+                >
+                    Your Voice. Our Responsibility.
+                </h3>
+
+                <p
+                    style="
+                        margin:0;
+                        font-size:11px;
+                        opacity:.75;
+                        max-width:520px;
+                    "
+                >
+                    Every genuine complaint helps improve
+                    the campus experience for everyone.
+                </p>
+
+            </div>
+
+
+            <a
+                href="complaint.html"
+                data-action="submit"
+                style="
+                    flex-shrink:0;
+                    padding:12px 18px;
+                    border-radius:10px;
+                    background:white;
+                    color:#096548;
+                    text-decoration:none;
+                    font-size:11px;
+                    font-weight:800;
+                "
+            >
+                Report an Issue →
+            </a>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer
+        style="
+            margin-top:45px;
+            padding:25px;
+            text-align:center;
+            color:#89958f;
+            font-size:10px;
+        "
+    >
+
+        <img
+            src="assets/apec-logo.png"
+            alt="APEC"
+            style="
+                width:34px;
+                height:34px;
+                object-fit:contain;
+                margin-bottom:7px;
+            "
+        >
+
+        <div>
+            Adhiparasakthi Engineering College
+        </div>
+
+        <div
+            style="
+                margin-top:4px;
+                opacity:.7;
+            "
+        >
+            Student Complaint & Grievance Portal
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script
+        type="module"
+        src="js/student.js"
+    ></script>
+
+
+</body>
+
+</html>

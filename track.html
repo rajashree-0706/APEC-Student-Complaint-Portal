@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>APEC | Track Complaint</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+    <style>
+
+        /* ==============================
+           TRACK PAGE
+        ============================== */
+
+        .track-page {
+            min-height: 100vh;
+        }
+
+        .track-main {
+            width: min(1050px, 92%);
+            margin: auto;
+            padding: 42px 0 70px;
+        }
+
+        /* HEADER */
+
+        .track-header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeUp .65s ease;
+        }
+
+        .track-header img {
+            width: 65px;
+            height: 65px;
+            object-fit: contain;
+            margin-bottom: 12px;
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+
+        .track-header h1 {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: 32px;
+            letter-spacing: -.9px;
+        }
+
+        .track-header p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* ==============================
+           SEARCH
+        ============================== */
+
+        .search-card {
+            padding: 20px;
+            margin-bottom: 22px;
+            animation: fadeUp .7s ease;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+
+            padding: 14px 16px;
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            outline: none;
+            font-family: inherit;
+
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 4px rgba(15,107,79,.08);
+        }
+
+        .search-box button {
+            padding: 0 23px;
+            border-radius: 12px;
+        }
+
+        /* ==============================
+           OVERVIEW
+        ============================== */
+
+        .complaint-overview {
+            padding: 27px;
+            margin-bottom: 22px;
+
+            animation: fadeUp .75s ease;
+        }
+
+        .overview-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+
+            padding-bottom: 22px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .overview-label {
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: .7px;
+
+            margin-bottom: 5px;
+        }
+
+        .complaint-overview h2 {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: 21px;
+        }
+
+        .overview-id {
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 800;
+            margin-top: 4px;
+        }
+
+        .overview-status {
+            padding: 7px 13px;
+            border-radius: 999px;
+
+            background: var(--primary-light);
+            color: var(--primary);
+
+            font-size: 11px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-top: 22px;
+        }
+
+        .overview-box {
+            padding: 15px;
+
+            background: #f8faf9;
+            border-radius: 12px;
+        }
+
+        .overview-box span {
+            display: block;
+
+            color: var(--muted);
+            font-size: 10px;
+
+            margin-bottom: 5px;
+        }
+
+        .overview-box strong {
+            font-size: 13px;
+        }
+
+        .overview-priority {
+            color: #92701f;
+        }
+
+        /* ==============================
+           TRACKING GRID
+        ============================== */
+
+        .tracking-grid {
+            display: grid;
+            grid-template-columns: 1.25fr .75fr;
+            gap: 22px;
+        }
+
+        /* ==============================
+           TIMELINE CARD
+        ============================== */
+
+        .timeline-card {
+            padding: 27px;
+            animation: fadeUp .8s ease;
+        }
+
+        .tracking-title {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+
+        .timeline {
+            margin: 0;
+        }
+
+        .timeline-item {
+            min-height: 65px;
+        }
+
+        .timeline-content strong {
+            font-size: 13px;
+        }
+
+        .timeline-content p {
+            color: var(--muted);
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        /* ==============================
+           SLA CARD
+        ============================== */
+
+        .sla-card {
+            padding: 25px;
+            animation: fadeUp .9s ease;
+        }
+
+        .sla-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 18px;
+        }
+
+        .sla-header h2 {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: 17px;
+        }
+
+        .sla-time {
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 9px;
+
+            background: #e8efeb;
+            border-radius: 999px;
+
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 67%;
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--primary),
+                    #42a879
+                );
+
+            border-radius: inherit;
+
+            animation: progressGrow 1.3s ease;
+        }
+
+        @keyframes progressGrow {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 67%;
+            }
+        }
+
+        .sla-details {
+            display: flex;
+            justify-content: space-between;
+
+            margin-top: 9px;
+
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .escalation-box {
+            margin-top: 22px;
+            padding: 15px;
+
+            background: #fffaf0;
+            border: 1px solid #eee1bd;
+            border-radius: 13px;
+        }
+
+        .escalation-box strong {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .escalation-box p {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        /* ==============================
+           FEEDBACK
+        ============================== */
+
+        .feedback-card {
+            padding: 27px;
+            margin-top: 22px;
+
+            animation: fadeUp 1s ease;
+        }
+
+        .feedback-card h2 {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: 18px;
+        }
+
+        .feedback-card > p {
+            color: var(--muted);
+            font-size: 12px;
+            margin: 4px 0 18px;
+        }
+
+        .stars {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .star {
+            width: 40px;
+            height: 40px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 11px;
+
+            border: 1px solid var(--border);
+            background: white;
+
+            color: #c6cec9;
+
+            font-size: 20px;
+
+            transition: var(--transition);
+        }
+
+        .star:hover,
+        .star.selected {
+            color: #c99b3b;
+            border-color: #e3d19e;
+            background: #fffaf0;
+
+            transform: translateY(-3px);
+        }
+
+        .feedback-box textarea {
+            width: 100%;
+
+            min-height: 95px;
+
+            padding: 13px 15px;
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            resize: vertical;
+
+            font-family: inherit;
+            outline: none;
+
+            transition: var(--transition);
+        }
+
+        .feedback-box textarea:focus {
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 4px rgba(15,107,79,.08);
+        }
+
+        .feedback-box button {
+            margin-top: 12px;
+        }
+
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+
+        @media (max-width: 850px) {
+
+            .tracking-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .overview-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .track-main {
+                width: 92%;
+                padding-top: 30px;
+            }
+
+            .track-header h1 {
+                font-size: 27px;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .search-box button {
+                min-height: 45px;
+            }
+
+            .overview-top {
+                flex-direction: column;
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .complaint-overview,
+            .timeline-card,
+            .sla-card,
+            .feedback-card {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<!-- ==============================
+     NAVBAR
+============================== -->
+
+<nav class="navbar">
+
+    <div class="navbar-left">
+
+        <img
+            src="assets/apec-logo.png"
+            alt="APEC Logo"
+            class="nav-logo"
+        >
+
+        <div>
+
+            <div class="navbar-brand">
+                APEC Student Portal
+            </div>
+
+            <div class="navbar-subtitle">
+                Complaint & Grievance Management
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <a
+        href="student.html"
+        class="btn btn-secondary"
+    >
+        ← Dashboard
+    </a>
+
+</nav>
+
+
+<!-- ==============================
+     MAIN
+============================== -->
+
+<main class="track-page">
+
+    <div class="track-main">
+
+
+        <!-- HEADER -->
+
+        <div class="track-header">
+
+            <img
+                src="assets/apec-logo.png"
+                alt="APEC Logo"
+            >
+
+            <h1>
+                Track Your Complaint
+            </h1>
+
+            <p>
+                Stay informed from submission to resolution.
+            </p>
+
+        </div>
+
+
+        <!-- ==============================
+             SEARCH
+        ============================== -->
+
+        <section class="card search-card">
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="complaintSearch"
+                    placeholder="Enter Complaint ID e.g. APEC-2026-0042"
+                >
+
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                >
+                    Search
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             OVERVIEW
+        ============================== -->
+
+        <section class="card complaint-overview">
+
+            <div class="overview-top">
+
+                <div>
+
+                    <div class="overview-label">
+                        Complaint
+                    </div>
+
+                    <h2>
+                        Complaint Details
+                    </h2>
+
+                    <div class="overview-id">
+                        Track your complaint status
+                    </div>
+
+                </div>
+
+
+                <span class="overview-status">
+                    Submitted
+                </span>
+
+            </div>
+
+
+            <div class="overview-grid">
+
+
+                <div class="overview-box">
+
+                    <span>
+                        Category
+                    </span>
+
+                    <strong class="overview-category">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="overview-box">
+
+                    <span>
+                        Assigned Department
+                    </span>
+
+                    <strong class="overview-department">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="overview-box">
+
+                    <span>
+                        Priority
+                    </span>
+
+                    <strong class="overview-priority">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="overview-box">
+
+                    <span>
+                        Submitted On
+                    </span>
+
+                    <strong class="overview-date">
+                        —
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             TRACKING + SLA
+        ============================== -->
+
+        <div class="tracking-grid">
+
+
+            <!-- TIMELINE -->
+
+            <section class="card timeline-card">
+
+                <h2 class="tracking-title">
+                    Complaint Timeline
+                </h2>
+
+
+                <div class="timeline">
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-content">
+
+                            <strong>
+                                Submitted
+                            </strong>
+
+                            <p>
+                                Complaint received successfully.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-content">
+
+                            <strong>
+                                Under Review
+                            </strong>
+
+                            <p>
+                                Administration is reviewing the concern.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-content">
+
+                            <strong>
+                                Assigned
+                            </strong>
+
+                            <p>
+                                Complaint routed to the responsible department.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-content">
+
+                            <strong>
+                                In Progress
+                            </strong>
+
+                            <p>
+                                Resolution work is currently underway.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-content">
+
+                            <strong>
+                                Resolved
+                            </strong>
+
+                            <p>
+                                Department has marked the issue as resolved.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-content">
+
+                            <strong>
+                                Closed
+                            </strong>
+
+                            <p>
+                                Complaint completed and verified.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- SLA -->
+
+            <aside class="card sla-card">
+
+                <div class="sla-header">
+
+                    <h2>
+                        Resolution SLA
+                    </h2>
+
+                    <span class="sla-time">
+                        32h / 48h
+                    </span>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div class="progress-fill"></div>
+
+                </div>
+
+
+                <div class="sla-details">
+
+                    <span>
+                        67% elapsed
+                    </span>
+
+                    <span>
+                        16h remaining
+                    </span>
+
+                </div>
+
+
+                <div class="escalation-box">
+
+                    <strong>
+                        🛡 Escalation Protection
+                    </strong>
+
+                    <p>
+                        If the complaint remains unresolved
+                        beyond the defined SLA, it can be
+                        escalated for administrative attention.
+                    </p>
+
+                </div>
+
+            </aside>
+
+
+        </div>
+
+
+        <!-- ==============================
+             FEEDBACK
+        ============================== -->
+
+        <section class="card feedback-card">
+
+            <h2>
+                Resolution Feedback
+            </h2>
+
+            <p>
+                Once your complaint is resolved, tell us
+                how well the issue was handled.
+            </p>
+
+
+            <div class="stars">
+
+                <button
+                    type="button"
+                    class="star"
+                >
+                    ★
+                </button>
+
+                <button
+                    type="button"
+                    class="star"
+                >
+                    ★
+                </button>
+
+                <button
+                    type="button"
+                    class="star"
+                >
+                    ★
+                </button>
+
+                <button
+                    type="button"
+                    class="star"
+                >
+                    ★
+                </button>
+
+                <button
+                    type="button"
+                    class="star"
+                >
+                    ★
+                </button>
+
+            </div>
+
+
+            <div class="feedback-box">
+
+                <textarea
+                    placeholder="Share your feedback about the resolution..."
+                ></textarea>
+
+
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                >
+                    Submit Feedback
+                    <span>→</span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    <p>
+        © 2026 Adhiparasakthi Engineering College
+        · Department of Information Technology
+    </p>
+
+</footer>
+
+
+<script
+    type="module"
+    src="js/track.js">
+</script>
+
+
+</body>
+</html>

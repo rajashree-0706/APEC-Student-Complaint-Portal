@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>APEC | Submit Complaint</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+    <style>
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .complaint-page {
+            min-height: 100vh;
+        }
+
+        .complaint-main {
+            width: min(1150px, 92%);
+            margin: auto;
+            padding: 42px 0 70px;
+        }
+
+        .complaint-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 28px;
+
+            animation: fadeUp .65s ease;
+        }
+
+        .complaint-header img {
+            width: 58px;
+            height: 58px;
+            object-fit: contain;
+        }
+
+        .complaint-header h1 {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: 30px;
+            letter-spacing: -.8px;
+        }
+
+        .complaint-header p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* =========================
+           LAYOUT
+        ========================= */
+
+        .complaint-layout {
+            display: grid;
+            grid-template-columns: 1.45fr .75fr;
+            gap: 22px;
+        }
+
+        .complaint-form-card,
+        .smart-card {
+            padding: 30px;
+            animation: fadeUp .7s ease;
+        }
+
+        .smart-card {
+            animation-delay: .12s;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .card-title {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: 19px;
+            margin-bottom: 5px;
+        }
+
+        .card-description {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 25px;
+        }
+
+        /* =========================
+           FORM GRID
+        ========================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .required {
+            color: #b23a3a;
+        }
+
+        .helper-text {
+            display: block;
+            color: var(--muted);
+            font-size: 10px;
+            margin-top: 6px;
+        }
+
+        /* =========================
+           FILE INPUT
+        ========================= */
+
+        .file-upload {
+            border: 1.5px dashed #cddbd5;
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: #fbfdfc;
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .file-upload input {
+            display: none;
+        }
+
+        .file-icon {
+            font-size: 25px;
+            margin-bottom: 5px;
+        }
+
+        .file-upload strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .file-upload span {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        /* =========================
+           CONFIDENTIAL
+        ========================= */
+
+        .confidential-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 11px;
+
+            padding: 15px;
+
+            background: #fffaf0;
+            border: 1px solid #eee1bd;
+            border-radius: 13px;
+
+            margin-top: 3px;
+        }
+
+        .confidential-box input {
+            width: 17px;
+            height: 17px;
+            accent-color: var(--primary);
+            margin-top: 2px;
+        }
+
+        .confidential-box strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .confidential-box span {
+            display: block;
+            color: var(--muted);
+            font-size: 10px;
+            margin-top: 2px;
+        }
+
+        /* =========================
+           SMART ENGINE
+        ========================= */
+
+        .smart-header {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin-bottom: 22px;
+        }
+
+        .smart-logo {
+            width: 40px;
+            height: 40px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 12px;
+
+            background: var(--primary-light);
+            color: var(--primary);
+
+            font-weight: 800;
+
+            animation: pulse 2.5s infinite;
+        }
+
+        .smart-header h2 {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: 16px;
+        }
+
+        .smart-header p {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .smart-item {
+            padding: 15px 0;
+        }
+
+        .smart-value {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        /* =========================
+           INTELLIGENCE BOX
+        ========================= */
+
+        .intelligence-note {
+            margin-top: 20px;
+            padding: 17px;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #f0faf5,
+                    #ffffff
+                );
+
+            border: 1px solid #dceee5;
+        }
+
+        .intelligence-note strong {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .intelligence-note p {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* =========================
+           SUBMIT
+        ========================= */
+
+        .submit-area {
+            margin-top: 24px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .submit-area button {
+            min-width: 180px;
+        }
+
+        /* =========================
+           LOADING
+        ========================= */
+
+        .submit-area button:disabled {
+            opacity: .65;
+            cursor: wait;
+            transform: none !important;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .complaint-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .smart-card {
+                position: static;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .complaint-main {
+                width: 92%;
+                padding-top: 30px;
+            }
+
+            .complaint-header h1 {
+                font-size: 25px;
+            }
+
+            .complaint-header img {
+                width: 48px;
+                height: 48px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .complaint-form-card,
+            .smart-card {
+                padding: 21px;
+            }
+
+            .submit-area button {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <div class="navbar-left">
+
+        <img
+            src="assets/apec-logo.png"
+            alt="APEC Logo"
+            class="nav-logo"
+        >
+
+        <div>
+
+            <div class="navbar-brand">
+                APEC Student Portal
+            </div>
+
+            <div class="navbar-subtitle">
+                Complaint & Grievance Management
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <a
+        href="student.html"
+        class="btn btn-secondary"
+    >
+        ← Dashboard
+    </a>
+
+</nav>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="complaint-page">
+
+    <div class="complaint-main">
+
+
+        <!-- HEADER -->
+
+        <div class="complaint-header">
+
+            <img
+                src="assets/apec-logo.png"
+                alt="APEC Logo"
+            >
+
+            <div>
+
+                <h1>
+                    Submit a Complaint
+                </h1>
+
+                <p>
+                    Tell us what needs attention. We'll help
+                    route it to the right team.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             CONTENT
+        ========================= -->
+
+        <div class="complaint-layout">
+
+
+            <!-- FORM -->
+
+            <section class="card complaint-form-card">
+
+                <h2 class="card-title">
+                    Complaint Details
+                </h2>
+
+                <p class="card-description">
+                    Provide accurate information so your concern
+                    can be resolved faster.
+                </p>
+
+
+                <form id="complaintForm">
+
+
+                    <div class="form-grid">
+
+
+                        <!-- TITLE -->
+
+                        <div class="form-group full-width">
+
+                            <label for="title">
+                                Complaint Title
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="title"
+                                placeholder="e.g. C Block Hostel Water Supply"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- CATEGORY -->
+
+                        <div class="form-group">
+
+                            <label for="category">
+                                Category
+                                <span class="required">*</span>
+                            </label>
+
+                            <select
+                                id="category"
+                                required
+                            >
+
+                                <option value="">
+                                    Select category
+                                </option>
+
+                                <option>
+                                    Classroom & Infrastructure
+                                </option>
+
+                                <option>
+                                    Laboratory & Computers
+                                </option>
+
+                                <option>
+                                    Wi-Fi & Internet
+                                </option>
+
+                                <option>
+                                    Furniture
+                                </option>
+
+                                <option>
+                                    Water & Sanitation
+                                </option>
+
+                                <option>
+                                    Transportation
+                                </option>
+
+                                <option>
+                                    Hostel
+                                </option>
+
+                                <option>
+                                    Library
+                                </option>
+
+                                <option>
+                                    Examination
+                                </option>
+
+                                <option>
+                                    Academic/Faculty
+                                </option>
+
+                                <option>
+                                    Sports
+                                </option>
+
+                                <option>
+                                    Canteen
+                                </option>
+
+                                <option>
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- SUBCATEGORY -->
+
+                        <div class="form-group">
+
+                            <label for="subcategory">
+                                Sub-category
+                            </label>
+
+                            <input
+                                type="text"
+                                id="subcategory"
+                                placeholder="Optional"
+                            >
+
+                        </div>
+
+
+                        <!-- DESCRIPTION -->
+
+                        <div class="form-group full-width">
+
+                            <label for="description">
+                                Detailed Description
+                                <span class="required">*</span>
+                            </label>
+
+                            <textarea
+                                id="description"
+                                placeholder="Explain the issue clearly..."
+                                required
+                            ></textarea>
+
+                            <span class="helper-text">
+                                More details help the administration
+                                understand and resolve the issue.
+                            </span>
+
+                        </div>
+
+
+                        <!-- LOCATION -->
+
+                        <div class="form-group">
+
+                            <label for="location">
+                                Block / Building
+                            </label>
+
+                            <input
+                                type="text"
+                                id="location"
+                                placeholder="e.g. C Block"
+                            >
+
+                        </div>
+
+
+                        <!-- ROOM -->
+
+                        <div class="form-group">
+
+                            <label for="room">
+                                Room / Location
+                            </label>
+
+                            <input
+                                type="text"
+                                id="room"
+                                placeholder="e.g. Room 204"
+                            >
+
+                        </div>
+
+
+                        <!-- EVIDENCE -->
+
+                        <div class="form-group full-width">
+
+                            <label>
+                                Supporting Evidence
+                            </label>
+
+                            <label class="file-upload">
+
+                                <input
+                                    type="file"
+                                    id="evidence"
+                                    accept=".jpg,.jpeg,.png,.pdf"
+                                >
+
+                                <div class="file-icon">
+                                    ↑
+                                </div>
+
+                                <strong>
+                                    Click to attach evidence
+                                </strong>
+
+                                <span>
+                                    JPG, PNG or PDF · Maximum 5MB
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+                        <!-- CONFIDENTIAL -->
+
+                        <div class="form-group full-width">
+
+                            <label class="confidential-box">
+
+                                <input
+                                    type="checkbox"
+                                    id="anonymous"
+                                >
+
+                                <span>
+
+                                    <strong>
+                                        Submit as Confidential
+                                    </strong>
+
+                                    <span>
+                                        Your identity will be protected
+                                        from normal complaint viewers.
+                                    </span>
+
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- SUBMIT -->
+
+                    <div class="submit-area">
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                        >
+                            Submit Complaint
+                            <span>→</span>
+                        </button>
+
+                    </div>
+
+
+                </form>
+
+            </section>
+
+
+            <!-- SMART PANEL -->
+
+            <aside class="card smart-card">
+
+
+                <div class="smart-header">
+
+                    <div class="smart-logo">
+                        ✦
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Smart Complaint Engine
+                        </h2>
+
+                        <p>
+                            Automatic analysis
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="smart-item">
+
+                    <span>
+                        Detected Category
+                    </span>
+
+                    <strong class="smart-value">
+                        Not detected
+                    </strong>
+
+                </div>
+
+
+                <div class="smart-item">
+
+                    <span>
+                        Priority Level
+                    </span>
+
+                    <strong class="smart-value">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="smart-item">
+
+                    <span>
+                        Assigned Department
+                    </span>
+
+                    <strong class="smart-value">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="intelligence-note">
+
+                    <strong>
+                        ✦ Campus Intelligence
+                    </strong>
+
+                    <p>
+                        Similar complaints can be grouped
+                        to help APEC identify recurring
+                        campus issues.
+                    </p>
+
+                </div>
+
+
+            </aside>
+
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    <p>
+        © 2026 Adhiparasakthi Engineering College
+        · Department of Information Technology
+    </p>
+
+</footer>
+
+
+<!-- FIREBASE COMPLAINT SCRIPT -->
+
+<script
+    type="module"
+    src="js/complaint.js">
+</script>
+
+
+</body>
+</html>
